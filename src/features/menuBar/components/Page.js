@@ -42,20 +42,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Page({ title, content, date, imgSrc }) {
+export default function Page(props) {
     const classes = useStyles();
-
     return (
         <Paper elevation={3} className={classes.paper}>
-            <img src={imgSrc} className={classes.mainImg} />
+            <img src={props.imgSrc} className={classes.mainImg} />
             <Typography className={classes.title}>
-                {title}
+                {props.title}
             </Typography>
-            <p className={classes.content}>
-                {content}
-            </p>
+            <div className={classes.content}>
+                {props.children}
+            </div>
             <p className={classes.date}>
-                {date}
+                {props.date}
             </p>
         </Paper>
     );

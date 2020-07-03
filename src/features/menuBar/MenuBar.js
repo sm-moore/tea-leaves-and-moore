@@ -7,8 +7,8 @@ import TabContext from '@material-ui/lab/TabContext';
 import TabPanel from '@material-ui/lab/TabPanel';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Post from './Post';
-import About from './About';
+import Home from './pages/Home';
+import About from './pages/About';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -63,7 +63,7 @@ export default function MenuBar() {
                 </AppBar>
                 <div className={classes.panelWrapper} >
                     <TabPanel value="home">
-                        <Post />
+                        <Home />
                     </TabPanel>
                     <TabPanel value="about">
                         <About />
