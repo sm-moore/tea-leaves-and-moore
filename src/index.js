@@ -7,6 +7,9 @@ import { LOCAL_COLORS } from './colors'
 import store from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import {
+  BrowserRouter as Router
+} from "react-router-dom";
 
 const theme = createMuiTheme({
   palette: {
@@ -32,7 +35,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <App />
+        <Router>
+          <App />
+        </Router>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,

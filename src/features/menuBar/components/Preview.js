@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: "200px",
         padding: theme.spacing(1),
     },
-    content: {
+    summary: {
         color: theme.colors.darkGreen,
         fontSize: "14px",
         margin: 0,
@@ -47,11 +47,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Preview({ title, content, date, imgSrc }) {
+export default function Preview({ onClick, title, summary, date, imgSrc }) {
     const classes = useStyles();
 
     return (
-        <Paper elevation={3} className={classes.paper}>
+        <Paper elevation={3} className={classes.paper} onClick={onClick}>
             <Grid container spacing={3}>
                 <Grid item xs={3}>
                     <img src={imgSrc} className={classes.mainImg} />
@@ -60,8 +60,8 @@ export default function Preview({ title, content, date, imgSrc }) {
                     <Typography className={classes.title}>
                         {title}
                     </Typography>
-                    <p className={classes.content}>
-                        {content}
+                    <p className={classes.summary}>
+                        {summary}
                     </p>
                     <p className={classes.date}>
                         {date}

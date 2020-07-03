@@ -10,11 +10,11 @@ export default function About() {
         imgSrc: moores,
         date: "Apr 20, 2020",
         summary: "",
-        contentFile: './content/about.md'
+        content: raw('./content/about.md')
     };
 
     let converter = new showdown.Converter();
-    let html = converter.makeHtml(raw('./content/about.md'));
+    let html = converter.makeHtml(aboutInfo.content);
 
     return (
         <Page title={aboutInfo.title}

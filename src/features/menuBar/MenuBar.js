@@ -9,6 +9,14 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Home from './pages/Home';
 import About from './pages/About';
+import { useHistory } from "react-router-dom";
+
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,10 +42,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MenuBar() {
     const classes = useStyles();
-    const [activeTab, setActiveTab] = React.useState('about');
+    const history = useHistory();
+    const [activeTab, setActiveTab] = React.useState('/posts');
 
     const handleChange = (event, newValue) => {
         setActiveTab(newValue);
+        history.push(newValue);
     };
 
     return (
@@ -56,18 +66,20 @@ export default function MenuBar() {
                             indicatorColor="primary"
                             textColor="primary"
                             centered>
-                            <Tab className={classes.fullHeight} label="Moore On Tech" id="moore_on_tech" value="home" />
-                            <Tab className={classes.fullHeight} label="About" id="about" value="about" />
+                            <Tab className={classes.fullHeight} label="Moore On Tech" id="moore_on_tech" value="/posts" />
+                            <Tab className={classes.fullHeight} label="About" id="about" value="/about" />
                         </Tabs>
                     </Toolbar>
                 </AppBar>
                 <div className={classes.panelWrapper} >
-                    <TabPanel value="home">
-                        <Home />
-                    </TabPanel>
-                    <TabPanel value="about">
-                        <About />
-                    </TabPanel>
+                    <Switch>
+                        <Route path='/about'>
+                            <About />
+                        </ Route>
+                        <Route path='/posts'>
+                            <Home />
+                        </ Route>
+                    </Switch>
                 </div>
             </TabContext>
         </div>
