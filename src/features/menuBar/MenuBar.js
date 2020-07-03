@@ -1,66 +1,73 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import TabContext from '@material-ui/lab/TabContext';
+import TabPanel from '@material-ui/lab/TabPanel';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Post from './Post';
+import About from './About';
+
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
         backgroundColor: theme.colors.lightGreen,
+        display: 'flex',
+    },
+    toolBar: {
     },
     menuButton: {
         // marginRight: theme.spacing(2),
     },
-    title: {
-        // marginRight: theme.spacing(2),
-        // flexGrow: 1,
+    barTitle: {
+        color: theme.colors.darkGrey,
+        fontSize: "30px",
+        marginLeft: theme.spacing(2),
+        flexGrow: 1,
     },
+    fullHeight: {
+        ...theme.mixins.toolbar,
+    }
 }));
 
 export default function MenuBar() {
     const classes = useStyles();
-    const [value, setValue] = React.useState(0);
+    const [activeTab, setActiveTab] = React.useState('home');
 
     const handleChange = (event, newValue) => {
-        setValue(newValue);
+        setActiveTab(newValue);
     };
 
     return (
         <div className={classes.root}>
-            <AppBar position="static" className={classes.appBar}>
-                {/* <Typography variant="h6" className={classes.title}>
-                    Moore On Tech
-                    </Typography> */}
-                <Tabs
-                    value={value}
-                    className={classes.tabs}
-                    onChange={handleChange}
-                    aria-label="tabs"
-                    indicatorColor="primary"
-                    textColor="primary">
-                    <Tab label="Moore On Tech" id="moore_on_tech" />
-                </Tabs>
-                {/* <Toolbar> */}
-                {/* <Typography variant="h6" edge="start" className={classes.title}>
-                        Moore On Tech
+            <TabContext value={activeTab}>
+                <AppBar position="static" className={classes.appBar}>
+                    <Toolbar className={classes.toolBar}>
+                        <Typography className={classes.barTitle}>
+                            Moore On Tech
                     </Typography>
-                    <Tabs value={value} className={classes.tabs} onChange={handleChange} aria-label="simple tabs example">
-                        <Tab label="Home" {...a11yProps(0)} />
-                    </Tabs> */}
-                {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" className={classes.title}>
-                        News
-                    </Typography>*/}
-                {/* <Button color="inherit">Login</Button> */}
-                {/* </Toolbar> */}
-            </AppBar>
+                        <Tabs
+                            value={activeTab}
+                            className={classes.fullHeight}
+                            onChange={handleChange}
+                            aria-label="tabs"
+                            indicatorColor="primary"
+                            textColor="primary"
+                            centered>
+                            <Tab className={classes.fullHeight} label="Moore On Tech" id="moore_on_tech" value="home" />
+                            <Tab className={classes.fullHeight} label="About" id="about" value="about" />
+                        </Tabs>
+                    </Toolbar>
+                </AppBar>
+                <TabPanel value="home">
+                    <Post />
+                </TabPanel>
+                <TabPanel value="about">
+                    <About />
+                </TabPanel>
+            </TabContext>
         </div>
     );
 }

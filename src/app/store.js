@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import activeTabReducer from '../features/menuBar/menuBarRedux';
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
+    activeTab: activeTabReducer,
   },
 });

@@ -1,35 +1,35 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import moores from './moores-18.jpg';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: "#FFFFF",
-        display: 'flex',
-        '& > *': {
-            margin: theme.spacing(1),
-            width: theme.spacing(16),
-            height: theme.spacing(16),
-        },
+        backgroundColor: theme.colors.backgroundWhite,
+        minHeight: "100vh"
     },
     title: {
-        color: "#FFBF46"
-    }
+        textAlign: "center",
+        fontSize: "78px",
+        color: theme.darkGrey,
+    },
+    mainImg: {
+        margin: 40,
+        width: "30%",
+    },
 }));
 
-export default function Post() {
+export default function About() {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
             <Paper elevation={3}>
-                <Typography variant="h2" className={classes.title}>
+                <Typography className={classes.title}>
                     Moore On Tech
                 </Typography>
-                <p>
-                    Words here... lots of them.
-                </p>
+                <img src={moores} className={classes.mainImg} />
             </Paper>
         </div>
     );
