@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
         ...theme.mixins.toolbar,
     },
     panelWrapper: {
-        marginTop: '65px',
+        marginTop: theme.spacing(3),
     },
 }));
 
@@ -53,7 +53,7 @@ export default function MenuBar() {
     return (
         <div className={classes.root}>
             <TabContext value={activeTab}>
-                <AppBar position="fixed" className={classes.appBar}>
+                <AppBar position="sticky" className={classes.appBar}>
                     <Toolbar className={classes.toolBar}>
                         <Typography className={classes.barTitle}>
                             Moore On Tech

@@ -20,20 +20,22 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-let posts = [{
-    title: "Our First Post",
-    imgSrc: moores,
-    date: "Jul 3, 2020",
-    summary: "This is our very first post and it's awesome!!",
-    content: raw('./content/first_post.md')
-},
-{
-    title: "Second Post",
-    imgSrc: moores,
-    date: "Jul 4, 2020",
-    summary: "Just another day in the life!",
-    content: raw('./content/first_post.md')
-}];
+let posts = {
+    'first-post': {
+        title: "Our First Post",
+        imgSrc: moores,
+        date: "Jul 3, 2020",
+        summary: "This is our very first post and it's awesome!!",
+        content: raw('./content/first_post.md')
+    },
+    'second-post': {
+        title: "Second Post",
+        imgSrc: moores,
+        date: "Jul 4, 2020",
+        summary: "Just another day in the life!",
+        content: raw('./content/first_post.md')
+    }
+};
 
 export default function Home() {
     const classes = useStyles();
@@ -41,13 +43,13 @@ export default function Home() {
     let match = useRouteMatch();
     console.log(match.path)
 
-    function selectPost(index) {
-        return () => { console.log(index); history.push('/posts/' + index) }
+    function selectPost(pathName) {
+        return () => { history.push('/posts/' + pathName) }
     }
 
     function PostView() {
-        let { postIdx } = useParams();
-        let selectedPost = posts[postIdx];
+        let { postPath } = useParams();
+        let selectedPost = posts[postPath];
 
         let converter = new showdown.Converter();
         let html = converter.makeHtml(selectedPost.content);
@@ -63,21 +65,22 @@ export default function Home() {
 
     function PostPreviews() {
         return (
-            posts.map((postInfo, index) => (
+            Object.keys(posts).map((pathName, index) => (
                 <Preview
                     key={index}
-                    onClick={selectPost(index)}
-                    title={postInfo.title}
-                    imgSrc={postInfo.imgSrc}
-                    date={postInfo.date}
-                    summary={postInfo.summary} />
+                    onClick={selectPost(pathName)}
+                    title={posts[pathName].title}
+                    imgSrc={posts[pathName].imgSrc}
+                    date={posts[pathName].date}
+                    summary={posts[pathName].summary} />
             ))
         )
     }
+
     return (
         <div className={classes.root}>
             <Switch>
-                <Route path={`${match.path}/:postIdx`}>
+                <Route path={`${match.path}/:postPath`}>
                     <PostView />
                 </Route>
                 <Route path='/posts'>
