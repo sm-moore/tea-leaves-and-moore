@@ -18,9 +18,6 @@ const useStyles = makeStyles((theme) => ({
     },
     toolBar: {
     },
-    menuButton: {
-        // marginRight: theme.spacing(2),
-    },
     barTitle: {
         color: theme.colors.darkGrey,
         fontSize: "30px",
@@ -29,12 +26,15 @@ const useStyles = makeStyles((theme) => ({
     },
     fullHeight: {
         ...theme.mixins.toolbar,
-    }
+    },
+    panelWrapper: {
+        marginTop: '65px',
+    },
 }));
 
 export default function MenuBar() {
     const classes = useStyles();
-    const [activeTab, setActiveTab] = React.useState('home');
+    const [activeTab, setActiveTab] = React.useState('about');
 
     const handleChange = (event, newValue) => {
         setActiveTab(newValue);
@@ -43,7 +43,7 @@ export default function MenuBar() {
     return (
         <div className={classes.root}>
             <TabContext value={activeTab}>
-                <AppBar position="static" className={classes.appBar}>
+                <AppBar position="fixed" className={classes.appBar}>
                     <Toolbar className={classes.toolBar}>
                         <Typography className={classes.barTitle}>
                             Moore On Tech
@@ -61,12 +61,14 @@ export default function MenuBar() {
                         </Tabs>
                     </Toolbar>
                 </AppBar>
-                <TabPanel value="home">
-                    <Post />
-                </TabPanel>
-                <TabPanel value="about">
-                    <About />
-                </TabPanel>
+                <div className={classes.panelWrapper} >
+                    <TabPanel value="home">
+                        <Post />
+                    </TabPanel>
+                    <TabPanel value="about">
+                        <About />
+                    </TabPanel>
+                </div>
             </TabContext>
         </div>
     );
