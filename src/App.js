@@ -1,31 +1,35 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import moores from './moores-18.jpg';
-import Post from './features/post/Post';
-import MenuBar from './features/menuBar/MenuBar';
 import './App.css';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import Main from './Main'
+import { LOCAL_COLORS } from './Colors'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    textAlign: "center",
-    backgroundColor: "#F5F5F5",
-    color: "#FFBF46"
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: LOCAL_COLORS.darkGrey,
+    },
+    secondary: {
+      main: LOCAL_COLORS.darkGreen,
+    },
   },
-  mainImg: {
-    width: "60%",
+  colors: {
+    backgroundLightGrey: LOCAL_COLORS.backgroundLightGrey,
+    backgroundWhite: LOCAL_COLORS.backgroundWhite,
+    lightGreen: LOCAL_COLORS.lightGreen,
+    darkGreen: LOCAL_COLORS.darkGreen,
+    mediumGrey: LOCAL_COLORS.mediumGrey,
+    darkGrey: LOCAL_COLORS.darkGrey,
+    yellow: LOCAL_COLORS.yellow,
   },
-}));
+});
+
 
 function App() {
-  const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <MenuBar />
-      <header className="App-header">
-        <img src={moores} className={classes.mainImg} />
-        <Post />
-      </header>
-    </div >
+    <ThemeProvider theme={theme}>
+      <Main />
+    </ThemeProvider>
   );
 }
 
