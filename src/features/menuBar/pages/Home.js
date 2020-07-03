@@ -1,7 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 import moores from './moores-18.jpg';
 import Preview from '../components/Preview';
 import showdown from 'showdown';
@@ -41,7 +39,6 @@ export default function Home() {
     const classes = useStyles();
     const history = useHistory();
     let match = useRouteMatch();
-    console.log(match.path)
 
     function selectPost(pathName) {
         return () => { history.push('/posts/' + pathName) }
