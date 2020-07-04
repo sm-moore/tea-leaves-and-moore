@@ -6,9 +6,9 @@ import raw from 'raw.macro';
 
 export default function About() {
     let aboutInfo = {
-        title: "We Are the Moores",
+        title: "Hi I'm Sara,",
         imgSrc: moores,
-        date: "Apr 20, 2020",
+        date: "Jul 3, 2020",
         summary: "",
         content: raw('./content/about.md')
     };

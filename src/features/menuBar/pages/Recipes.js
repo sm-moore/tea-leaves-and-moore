@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import moores from './moores-18.jpg';
+import veganPBCupsImg from './content/vegan_pb_cups.jpeg';
 import Preview from '../components/Preview';
 import showdown from 'showdown';
 import raw from 'raw.macro';
@@ -19,22 +19,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 let posts = {
-    'first-post': {
-        title: "Our First Post",
-        imgSrc: moores,
+    'vegan-pb-cups': {
+        title: "Vegan Peanut Butter Cups",
+        imgSrc: veganPBCupsImg,
         date: "Jul 3, 2020",
-        summary: "This is our very first post and it's awesome!!",
-        content: raw('./content/first_post.md')
+        summary: "Chocolate covered peanut butter? What's not to love? Plus it's vegan!",
+        content: raw('./content/vegan_pb_cups.md')
     }
 };
 
-export default function Home() {
+export default function Recipes() {
     const classes = useStyles();
     const history = useHistory();
     let match = useRouteMatch();
 
     function selectPost(pathName) {
-        return () => { history.push('/posts/' + pathName) }
+        return () => { history.push('/recipes/' + pathName) }
     }
 
     function PostView() {
@@ -73,10 +73,10 @@ export default function Home() {
                 <Route path={`${match.path}/:postPath`}>
                     <PostView />
                 </Route>
-                <Route path='/posts'>
+                <Route path={match.path}>
                     <PostPreviews />
                 </Route>
             </Switch>
-        </div>
+        </div >
     );
 }

@@ -9,15 +9,14 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Home from './pages/Home';
 import About from './pages/About';
+import Recipes from './pages/Recipes';
 import { useHistory } from "react-router-dom";
-
 import {
-    BrowserRouter as Router,
     Switch,
-    Route,
-    Link
+    Route
 } from "react-router-dom";
 
+const TITLE = "i drink my tea black"
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -56,8 +55,8 @@ export default function MenuBar() {
                 <AppBar position="sticky" className={classes.appBar}>
                     <Toolbar className={classes.toolBar}>
                         <Typography className={classes.barTitle}>
-                            Moore On Tech
-                    </Typography>
+                            {TITLE}
+                        </Typography>
                         <Tabs
                             value={activeTab}
                             className={classes.fullHeight}
@@ -66,7 +65,8 @@ export default function MenuBar() {
                             indicatorColor="primary"
                             textColor="primary"
                             centered>
-                            <Tab className={classes.fullHeight} label="Moore On Tech" id="moore_on_tech" value="/posts" />
+                            <Tab className={classes.fullHeight} label="Posts" id="posts" value="/posts" />
+                            <Tab className={classes.fullHeight} label="Recipes" id="recipes" value="/recipes" />
                             <Tab className={classes.fullHeight} label="About" id="about" value="/about" />
                         </Tabs>
                     </Toolbar>
@@ -78,6 +78,9 @@ export default function MenuBar() {
                         </ Route>
                         <Route path='/posts'>
                             <Home />
+                        </ Route>
+                        <Route path='/recipes'>
+                            <Recipes />
                         </ Route>
                     </Switch>
                 </div>

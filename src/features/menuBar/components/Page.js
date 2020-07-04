@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 'auto',
     },
     content: {
-        color: theme.colors.darkGreen,
+        color: theme.colors.darkGrey,
         fontSize: "24px",
         margin: 0,
         paddingLeft: theme.spacing(2),
