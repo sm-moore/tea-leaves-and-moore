@@ -33,10 +33,17 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
     fullHeight: {
-        ...theme.mixins.toolbar,
     },
     panelWrapper: {
         marginTop: theme.spacing(3),
+    },
+    logo: {
+        maxWidth: "600px",
+        width: "60%",
+        display: 'block',
+        padding: theme.spacing(2),
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
 }));
 
@@ -57,25 +64,34 @@ export default function MenuBar() {
 
     return (
         <div className={classes.root}>
+            <header>
+                <span>
+                    <img src='./fullNamedLogo.png' className={classes.logo} />
+                    {/* <Typography className={classes.barTitle}>
+                            {TITLE}
+                        </Typography> */}
+                </span>
+            </header>
             <TabContext value={activeTab}>
                 <AppBar position="sticky" className={classes.appBar}>
-                    <Toolbar className={classes.toolBar}>
+                    {/* <Toolbar className={classes.toolBar}> */}
+                    {/* <img src='./cupOutline.png' className={classes.logo} />
                         <Typography className={classes.barTitle}>
                             {TITLE}
-                        </Typography>
-                        <Tabs
-                            value={activeTab}
-                            className={classes.fullHeight}
-                            onChange={handleChange}
-                            aria-label="tabs"
-                            indicatorColor="primary"
-                            textColor="primary"
-                            centered>
-                            <Tab className={classes.fullHeight} label="Posts" id="posts" value="/posts" />
-                            <Tab className={classes.fullHeight} label="Recipes" id="recipes" value="/recipes" />
-                            <Tab className={classes.fullHeight} label="About" id="about" value="/about" />
-                        </Tabs>
-                    </Toolbar>
+                        </Typography> */}
+                    <Tabs
+                        value={activeTab}
+                        className={classes.fullHeight}
+                        onChange={handleChange}
+                        aria-label="tabs"
+                        indicatorColor="primary"
+                        textColor="primary"
+                        centered>
+                        <Tab className={classes.fullHeight} label="Posts" id="posts" value="/posts" />
+                        <Tab className={classes.fullHeight} label="Recipes" id="recipes" value="/recipes" />
+                        <Tab className={classes.fullHeight} label="About" id="about" value="/about" />
+                    </Tabs>
+                    {/* </Toolbar> */}
                 </AppBar>
                 <div className={classes.panelWrapper} >
                     <Switch>
