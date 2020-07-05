@@ -1,3 +1,6 @@
+# Tea Leaves and Moore
+This app is designed to be my personal blog and also a fun side project.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
@@ -27,42 +30,39 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Build/Deploy
+To set up docker I followed this lovely [guide](https://mherman.org/blog/dockerizing-a-react-app/).
+Basically to build and deploy the app, you build a docker image, push it to `gcr` retag it as `latest` push it again.
+Then to deploy the image you ssh into the container and restart the server with the new image.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Installing and setting up gcloud and docker
+This app gets deployed to a gcloud `Compute Engine` vm. You'll need to install gcloud cli and docker.
+Once you've set up gcloud and installed docker run
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+`gcloud auth configure-docker`
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+this will configure docker to point at gcloud's container registry (gcr).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Build
 
-## Learn More
+#### Build docker for development
+`./scripts/build_and_run_dev`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Build docker for prod
+`./scripts/01_build_prod.sh {tag_number} --run` add the run flag if you want to run and test the
+image. You can visit localhost:1337 to verify it.
+`./scripts/02_push_prod.sh` publishes the latest docker build to gcr.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Deploy to production
 
-### Code Splitting
+currently this deploys by restarting the container.
+`./scripts/03_deploy_prod.sh`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+If manual deployment is needed, for whatever reason. 
+`gcloud beta compute ssh --zone "us-central1-a" "instance-1" --project "fluid-mix-282315"`
+`docker run -it --rm -p 1337:80 us.gcr.io/fluid-mix-282315/js-react-redux:latest`
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## How to add a new Post
+1. Create a new markdown file.
+2. Add an image to google storage.
+3. Add a new mapping to the corresponding page for your markdown file and image.
