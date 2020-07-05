@@ -58,21 +58,24 @@ export default function Page(props) {
     return (
         <Paper elevation={3} className={classes.paper}>
             <img src={props.imgSrc} className={classes.mainImg} />
-            <span className={classes.imgSpan}>
-                {'Photo by '}
-                <a target="_blank" className={classes.imgLink} href={props.imgAuthorLink}>
-                    {props.imgAuthorName}
-                </a>
-                {
-                    props.imgSrcWebsiteName &&
-                    <span>
-                        {' on '}
-                        < a target="_blank" className={classes.imgLink} href={props.imgSrcWebsiteLink} >
-                            {props.imgSrcWebsiteName}
-                        </a >
-                    </span>
-                }
-            </span>
+            {
+                props.imgAuthorLink &&
+                <span className={classes.imgSpan}>
+                    {'Photo by '}
+                    <a target="_blank" className={classes.imgLink} href={props.imgAuthorLink}>
+                        {props.imgAuthorName}
+                    </a>
+                    {
+                        props.imgSrcWebsiteName &&
+                        <span>
+                            {' on '}
+                            < a target="_blank" className={classes.imgLink} href={props.imgSrcWebsiteLink} >
+                                {props.imgSrcWebsiteName}
+                            </a >
+                        </span>
+                    }
+                </span>
+            }
             <Typography className={classes.title}>
                 {props.title}
             </Typography>

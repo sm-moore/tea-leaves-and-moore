@@ -21,8 +21,6 @@ let posts = {
     'vegan-pb-cups': {
         title: "Vegan Peanut Butter Cups",
         imgSrc: 'https://storage.cloud.google.com/us.artifacts.fluid-mix-282315.appspot.com/vegan_pb_cups.jpeg',
-        imgAuthorLink: 'https://unsplash.com/@wsheng1011?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText',
-        imgAuthorName: 'yours truly',
         date: "Jul 3, 2020",
         summary: "Chocolate covered peanut butter? What's not to love? Plus it's vegan!",
         content: raw('./content/vegan_pb_cups.md')
