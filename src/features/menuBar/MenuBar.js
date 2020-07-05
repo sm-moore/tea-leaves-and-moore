@@ -6,9 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import TabContext from '@material-ui/lab/TabContext';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Home from './pages/Home';
-import About from './pages/About';
-import Recipes from './pages/Recipes';
+import Posts from '../posts/Posts';
+import About from '../about/About';
+import Recipes from '../recipes/Recipes';
 import {
     Switch,
     Route,
@@ -50,8 +50,6 @@ export default function MenuBar() {
 
     const [activeTab, setActiveTab] = React.useState(location.pathname);
 
-
-
     const handleChange = (event, newValue) => {
         setActiveTab(newValue);
         history.push(newValue);
@@ -85,7 +83,7 @@ export default function MenuBar() {
                             <About />
                         </ Route>
                         <Route path='/posts'>
-                            <Home />
+                            <Posts />
                         </ Route>
                         <Route path='/recipes'>
                             <Recipes />

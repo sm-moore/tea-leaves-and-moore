@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Preview from '../components/Preview';
+import Preview from '../postComponents/Preview';
 import showdown from 'showdown';
 import raw from 'raw.macro';
-import Page from '../components/Page';
+import Page from '../postComponents/Page';
 import {
     Switch,
     Route,
@@ -12,12 +12,7 @@ import {
     useHistory
 } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-    },
-}));
-
-let posts = {
+const POSTS_CONFIG = {
     'first-post': {
         title: "Quarter 3 Goals",
         imgSrc: 'https://storage.cloud.google.com/us.artifacts.fluid-mix-282315.appspot.com/Q3_goals_1.jpg',
@@ -27,11 +22,16 @@ let posts = {
         imgSrcWebsiteName: 'Unsplash',
         date: "Jul 3, 2020",
         summary: "Setting personal and professional goals.",
-        content: raw('./content/quarter_3_goals.md')
+        content: raw('../content/quarter_3_goals.md')
     }
 };
 
-export default function Home() {
+const useStyles = makeStyles((theme) => ({
+    root: {
+    },
+}));
+
+export default function Posts() {
     const classes = useStyles();
     const history = useHistory();
     let match = useRouteMatch();
@@ -42,7 +42,7 @@ export default function Home() {
 
     function PostView() {
         let { postPath } = useParams();
-        let selectedPost = posts[postPath];
+        let selectedPost = POSTS_CONFIG[postPath];
 
         let converter = new showdown.Converter();
         let html = converter.makeHtml(selectedPost.content);
@@ -62,14 +62,14 @@ export default function Home() {
 
     function PostPreviews() {
         return (
-            Object.keys(posts).map((pathName, index) => (
+            Object.keys(POSTS_CONFIG).map((pathName, index) => (
                 <Preview
                     key={index}
                     onClick={selectPost(pathName)}
-                    title={posts[pathName].title}
-                    imgSrc={posts[pathName].imgSrc}
-                    date={posts[pathName].date}
-                    summary={posts[pathName].summary} />
+                    title={POSTS_CONFIG[pathName].title}
+                    imgSrc={POSTS_CONFIG[pathName].imgSrc}
+                    date={POSTS_CONFIG[pathName].date}
+                    summary={POSTS_CONFIG[pathName].summary} />
             ))
         )
     }

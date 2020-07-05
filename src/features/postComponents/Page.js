@@ -59,7 +59,7 @@ export default function Page(props) {
         <Paper elevation={3} className={classes.paper}>
             <img src={props.imgSrc} className={classes.mainImg} />
             {
-                props.imgAuthorLink &&
+                props.imgAuthorName &&
                 <span className={classes.imgSpan}>
                     {'Photo by '}
                     <a target="_blank" className={classes.imgLink} href={props.imgAuthorLink}>
