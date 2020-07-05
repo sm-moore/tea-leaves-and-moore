@@ -44,13 +44,14 @@ const useStyles = makeStyles((theme) => ({
 export default function MenuBar() {
     const classes = useStyles();
     const history = useHistory();
-    const [activeTab, setActiveTab] = React.useState(DEFAULT_PATH);
-
     let location = useLocation();
-
     if (location.pathname === '/') {
         history.push(DEFAULT_PATH)
     }
+
+    const [activeTab, setActiveTab] = React.useState(location.pathname);
+
+
 
     const handleChange = (event, newValue) => {
         setActiveTab(newValue);
