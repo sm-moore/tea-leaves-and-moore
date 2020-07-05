@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -40,13 +41,38 @@ const useStyles = makeStyles((theme) => ({
         paddingRight: theme.spacing(1),
         paddingBottom: '5px',
     },
+    imgSpan: {
+        paddingLeft: theme.spacing(2),
+        fontSize: '12px',
+        color: theme.colors.lightGreen,
+    },
+    imgLink: {
+        fontSize: '12px',
+        color: theme.colors.lightGreen,
+    },
 }));
+
 
 export default function Page(props) {
     const classes = useStyles();
     return (
         <Paper elevation={3} className={classes.paper}>
             <img src={props.imgSrc} className={classes.mainImg} />
+            <span className={classes.imgSpan}>
+                {'Photo by '}
+                <a target="_blank" className={classes.imgLink} href={props.imgAuthorLink}>
+                    {props.imgAuthorName}
+                </a>
+                {
+                    props.imgSrcWebsiteName &&
+                    <span>
+                        {' on '}
+                        < a target="_blank" className={classes.imgLink} href={props.imgSrcWebsiteLink} >
+                            {props.imgSrcWebsiteName}
+                        </a >
+                    </span>
+                }
+            </span>
             <Typography className={classes.title}>
                 {props.title}
             </Typography>
@@ -56,6 +82,16 @@ export default function Page(props) {
             <p className={classes.date}>
                 {props.date}
             </p>
-        </Paper>
+        </Paper >
     );
 }
+
+Page.propTypes = {
+    title: PropTypes.string,
+    imgSrc: PropTypes.string,
+    date: PropTypes.string,
+    imgAuthorLink: PropTypes.string,
+    imgAuthorName: PropTypes.string,
+    imgSrcWebsiteLink: PropTypes.string,
+    imgSrcWebsiteName: PropTypes.string,
+};

@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import veganPBCupsImg from './content/vegan_pb_cups.jpeg';
 import Preview from '../components/Preview';
 import showdown from 'showdown';
 import raw from 'raw.macro';
@@ -21,7 +20,9 @@ const useStyles = makeStyles((theme) => ({
 let posts = {
     'vegan-pb-cups': {
         title: "Vegan Peanut Butter Cups",
-        imgSrc: veganPBCupsImg,
+        imgSrc: 'https://storage.cloud.google.com/us.artifacts.fluid-mix-282315.appspot.com/vegan_pb_cups.jpeg',
+        imgAuthorLink: 'https://unsplash.com/@wsheng1011?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText',
+        imgAuthorName: 'yours truly',
         date: "Jul 3, 2020",
         summary: "Chocolate covered peanut butter? What's not to love? Plus it's vegan!",
         content: raw('./content/vegan_pb_cups.md')
@@ -47,7 +48,11 @@ export default function Recipes() {
         return (
             <Page title={selectedPost.title}
                 imgSrc={selectedPost.imgSrc}
-                date={selectedPost.date}>
+                date={selectedPost.date}
+                imgAuthorLink={selectedPost.imgAuthorLink}
+                imgAuthorName={selectedPost.imgAuthorName}
+                imgSrcWebsiteLink={selectedPost.imgSrcWebsiteLink}
+                imgSrcWebsiteName={selectedPost.imgSrcWebsiteName}>
                 <div dangerouslySetInnerHTML={{ __html: html }} />
             </ Page >
         )

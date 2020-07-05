@@ -10,13 +10,15 @@ import Tab from '@material-ui/core/Tab';
 import Home from './pages/Home';
 import About from './pages/About';
 import Recipes from './pages/Recipes';
-import { useHistory } from "react-router-dom";
 import {
     Switch,
-    Route
+    Route,
+    useHistory,
+    useLocation,
 } from "react-router-dom";
 
-const TITLE = "i drink my tea black"
+const TITLE = "Tea Leaves and Moore"
+const DEFAULT_PATH = '/posts'
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -42,7 +44,13 @@ const useStyles = makeStyles((theme) => ({
 export default function MenuBar() {
     const classes = useStyles();
     const history = useHistory();
-    const [activeTab, setActiveTab] = React.useState('/posts');
+    const [activeTab, setActiveTab] = React.useState(DEFAULT_PATH);
+
+    let location = useLocation();
+
+    if (location.pathname === '/') {
+        history.push(DEFAULT_PATH)
+    }
 
     const handleChange = (event, newValue) => {
         setActiveTab(newValue);

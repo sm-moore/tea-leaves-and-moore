@@ -1,16 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import moores from './moores-18.jpg';
 import Preview from '../components/Preview';
 import showdown from 'showdown';
 import raw from 'raw.macro';
 import Page from '../components/Page';
-import { useHistory } from "react-router-dom";
 import {
     Switch,
     Route,
     useRouteMatch,
-    useParams
+    useParams,
+    useHistory
 } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,11 +19,15 @@ const useStyles = makeStyles((theme) => ({
 
 let posts = {
     'first-post': {
-        title: "Our First Post",
-        imgSrc: moores,
+        title: "Quarter 3 Goals",
+        imgSrc: 'https://storage.cloud.google.com/us.artifacts.fluid-mix-282315.appspot.com/Q3_goals_1.jpg',
+        imgAuthorLink: 'https://unsplash.com/@wsheng1011?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText',
+        imgAuthorName: 'Han Wei Sheng',
+        imgSrcWebsiteLink: 'https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText',
+        imgSrcWebsiteName: 'Unsplash',
         date: "Jul 3, 2020",
-        summary: "This is our very first post and it's awesome!!",
-        content: raw('./content/first_post.md')
+        summary: "Setting personal and professional goals.",
+        content: raw('./content/quarter_3_goals.md')
     }
 };
 
@@ -47,7 +50,11 @@ export default function Home() {
         return (
             <Page title={selectedPost.title}
                 imgSrc={selectedPost.imgSrc}
-                date={selectedPost.date}>
+                date={selectedPost.date}
+                imgAuthorLink={selectedPost.imgAuthorLink}
+                imgAuthorName={selectedPost.imgAuthorName}
+                imgSrcWebsiteLink={selectedPost.imgSrcWebsiteLink}
+                imgSrcWebsiteName={selectedPost.imgSrcWebsiteName}>
                 <div dangerouslySetInnerHTML={{ __html: html }} />
             </ Page >
         )
