@@ -1,31 +1,33 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Preview from '../components/Preview';
+import Preview from '../postComponents/Preview';
 import showdown from 'showdown';
 import raw from 'raw.macro';
-import Page from '../components/Page';
-import { useHistory } from "react-router-dom";
+import Page from '../postComponents/Page';
 import {
     Switch,
     Route,
     useRouteMatch,
-    useParams
+    useParams,
+    useHistory
 } from "react-router-dom";
+
+
+const RECIPES_CONFIG = {
+    'vegan-pb-cups': {
+        title: "Vegan Peanut Butter Cups",
+        imgSrc: 'https://storage.cloud.google.com/us.artifacts.fluid-mix-282315.appspot.com/vegan_pb_cups.jpeg',
+        date: "Jul 3, 2020",
+        summary: "Chocolate covered peanut butter? What's not to love? Plus it's vegan!",
+        content: raw('../content/vegan_pb_cups.md')
+    }
+};
 
 const useStyles = makeStyles((theme) => ({
     root: {
     },
 }));
 
-let posts = {
-    'vegan-pb-cups': {
-        title: "Vegan Peanut Butter Cups",
-        imgSrc: 'https://storage.cloud.google.com/us.artifacts.fluid-mix-282315.appspot.com/vegan_pb_cups.jpeg',
-        date: "Jul 3, 2020",
-        summary: "Chocolate covered peanut butter? What's not to love? Plus it's vegan!",
-        content: raw('./content/vegan_pb_cups.md')
-    }
-};
 
 export default function Recipes() {
     const classes = useStyles();
@@ -38,7 +40,7 @@ export default function Recipes() {
 
     function PostView() {
         let { postPath } = useParams();
-        let selectedPost = posts[postPath];
+        let selectedPost = RECIPES_CONFIG[postPath];
 
         let converter = new showdown.Converter();
         let html = converter.makeHtml(selectedPost.content);
@@ -58,14 +60,14 @@ export default function Recipes() {
 
     function PostPreviews() {
         return (
-            Object.keys(posts).map((pathName, index) => (
+            Object.keys(RECIPES_CONFIG).map((pathName, index) => (
                 <Preview
                     key={index}
                     onClick={selectPost(pathName)}
-                    title={posts[pathName].title}
-                    imgSrc={posts[pathName].imgSrc}
-                    date={posts[pathName].date}
-                    summary={posts[pathName].summary} />
+                    title={RECIPES_CONFIG[pathName].title}
+                    imgSrc={RECIPES_CONFIG[pathName].imgSrc}
+                    date={RECIPES_CONFIG[pathName].date}
+                    summary={RECIPES_CONFIG[pathName].summary} />
             ))
         )
     }
